@@ -1,8 +1,26 @@
-const express = require("express");
-const router = express.Router;
-const User = require("../models/User");
-const Post = require("../models/Post");
-const bcrypt = require("bcrypt");
-const Comment = require("../models/Comment");
-const verifyToken = require("../routes/verifyToken");
+const mongoose = require("mongoose");
 
+const UserSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    bio: {
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("User", UserSchema);
